@@ -12,6 +12,7 @@ import { SessionService } from 'src/app/services/session.service';
 
 import { Router } from '@angular/router';
 import { of, throwError } from 'rxjs';
+import { LoginRequest } from '../../interfaces/loginRequest.interface';
 import { AuthService } from '../../services/auth.service';
 import { LoginComponent } from './login.component';
 
@@ -65,15 +66,16 @@ describe('LoginComponent', () => {
     const spiedNavigate = jest.spyOn(router, 'navigate');
     
     component.form.setValue({ email: "yoga@studio.com", password: "test!1234" });
+    const loginRequest = component.form.value as LoginRequest;
     component.submit();
     
-    expect(spiedAuthServiceLogin).toHaveBeenCalled();
+    expect(spiedAuthServiceLogin).toHaveBeenCalledWith(loginRequest);
     expect(spiedSessionServiceLogIn).toHaveBeenCalledWith(mockedSessionInformation);
     expect(spiedNavigate).toHaveBeenCalledWith(['/sessions']);
   });
 
   it('should display error message', () => {
-    const spiedAuthServiceLogin = jest.spyOn(authService, 'login').mockReturnValue(throwError(() => {}));
+    const spiedAuthServiceLogin = jest.spyOn(authService, 'login').mockReturnValue(throwError(() => new Error()));
     
     component.submit();
     
