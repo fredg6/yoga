@@ -81,8 +81,6 @@ describe('MeComponent', () => {
   it('should correctly display admin user account on init', () => {
     const datePipe = TestBed.inject(DatePipe);
     
-    component.ngOnInit();
-
     let pElements = fixture.nativeElement.querySelectorAll("p");
     expect(pElements).toHaveLength(5);
     expect(pElements[0].textContent).toContain(`Name: ${mockedUser.firstName} ${mockedUser.lastName.toUpperCase()}`);
