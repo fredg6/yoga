@@ -1,0 +1,10 @@
+{
+    "id": 3,
+    "name": "Session 3",
+    "description": "Encore une autre session",
+    "date": "2025-10-30T15:00:00",
+    "teacher_id": 2,
+    "users": [],
+    "createdAt": "2025-09-22T15:48:47",
+    "updatedAt": "2025-09-22T15:48:47"
+}

@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Session 1",
+        "description": "Une session",
+        "date": "2025-10-23T15:00:00",
+        "teacher_id": 1,
+        "users": [3, 4, 5],
+        "createdAt": "2025-09-22T15:48:47",
+        "updatedAt": "2025-09-22T15:48:47"
+    },
+    {
+        "id": 2,
+        "name": "Session 2",
+        "description": "Une autre session",
+        "date": "2025-10-30T15:00:00",
+        "teacher_id": 2,
+        "users": [2, 3, 4],
+        "createdAt": "2025-09-22T15:48:47",
+        "updatedAt": "2025-09-22T15:48:47"
+    }
+]
