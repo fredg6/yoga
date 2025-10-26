@@ -34,10 +34,10 @@ class TeacherServiceTest {
 
     @Test
     void findAll_shouldReturnAllExistingTeachers() {
-        List<Teacher> teachers = List.of(teacher);
+        var teachers = List.of(teacher);
         when(teacherRepository.findAll()).thenReturn(teachers);
 
-        List<Teacher> allTeachers = teacherService.findAll();
+        var allTeachers = teacherService.findAll();
 
         verify(teacherRepository, times(1)).findAll();
         assertThat(allTeachers).hasSize(teachers.size());
@@ -47,7 +47,7 @@ class TeacherServiceTest {
     void givenTheIdOfAnExistingTeacher_whenCallIsMadeToFindById_thenReturnsTheTeacher() {
         when(teacherRepository.findById(teacher.getId())).thenReturn(Optional.of(teacher));
 
-        Teacher foundTeacher = teacherService.findById(teacher.getId());
+        var foundTeacher = teacherService.findById(teacher.getId());
 
         verify(teacherRepository, times(1)).findById(teacher.getId());
         assertThat(foundTeacher).isEqualTo(teacher);
@@ -58,7 +58,7 @@ class TeacherServiceTest {
         teacher.setId(99999L);
         when(teacherRepository.findById(teacher.getId())).thenReturn(Optional.empty());
 
-        Teacher foundTeacher = teacherService.findById(teacher.getId());
+        var foundTeacher = teacherService.findById(teacher.getId());
 
         verify(teacherRepository, times(1)).findById(teacher.getId());
         assertThat(foundTeacher).isNull();
