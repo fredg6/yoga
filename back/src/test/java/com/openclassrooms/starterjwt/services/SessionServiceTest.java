@@ -88,7 +88,7 @@ class SessionServiceTest {
         Session foundSession = sessionService.getById(session.getId());
 
         verify(sessionRepository, times(1)).findById(session.getId());
-        assertThat(foundSession).isNotNull();
+        assertThat(foundSession).isEqualTo(session);
     }
 
     @Test

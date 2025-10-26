@@ -50,7 +50,7 @@ class TeacherServiceTest {
         Teacher foundTeacher = teacherService.findById(teacher.getId());
 
         verify(teacherRepository, times(1)).findById(teacher.getId());
-        assertThat(foundTeacher).isNotNull();
+        assertThat(foundTeacher).isEqualTo(teacher);
     }
 
     @Test
