@@ -47,7 +47,7 @@ class UserServiceTest {
     void givenTheIdOfAnExistingUser_whenCallIsMadeToFindById_thenReturnsTheUser() {
         when(userRepository.findById(user.getId())).thenReturn(Optional.of(user));
 
-        User foundUser = userService.findById(user.getId());
+        var foundUser = userService.findById(user.getId());
 
         verify(userRepository, times(1)).findById(user.getId());
         assertThat(foundUser).isEqualTo(user);
@@ -58,7 +58,7 @@ class UserServiceTest {
         user.setId(99999L);
         when(userRepository.findById(user.getId())).thenReturn(Optional.empty());
 
-        User foundUser = userService.findById(user.getId());
+        var foundUser = userService.findById(user.getId());
 
         verify(userRepository, times(1)).findById(user.getId());
         assertThat(foundUser).isNull();

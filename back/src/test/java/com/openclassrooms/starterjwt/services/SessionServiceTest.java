@@ -55,7 +55,7 @@ class SessionServiceTest {
     void givenASessionToCreate_whenCallIsMadeToCreate_thenReturnsTheCreatedSession() {
         when(sessionRepository.save(session)).thenReturn(session);
 
-        Session createdSession = sessionService.create(session);
+        var createdSession = sessionService.create(session);
 
         verify(sessionRepository, times(1)).save(session);
         assertThat(createdSession).isEqualTo(session);
@@ -72,10 +72,10 @@ class SessionServiceTest {
 
     @Test
     void findAll_shouldReturnAllExistingSessions() {
-        List<Session> sessions = List.of(session);
+        var sessions = List.of(session);
         when(sessionRepository.findAll()).thenReturn(sessions);
 
-        List<Session> allSessions = sessionService.findAll();
+        var allSessions = sessionService.findAll();
 
         verify(sessionRepository, times(1)).findAll();
         assertThat(allSessions).hasSize(sessions.size());
@@ -85,7 +85,7 @@ class SessionServiceTest {
     void givenTheIdOfAnExistingSession_whenCallIsMadeToGetById_thenReturnsTheSession() {
         when(sessionRepository.findById(session.getId())).thenReturn(Optional.of(session));
 
-        Session foundSession = sessionService.getById(session.getId());
+        var foundSession = sessionService.getById(session.getId());
 
         verify(sessionRepository, times(1)).findById(session.getId());
         assertThat(foundSession).isEqualTo(session);
@@ -96,7 +96,7 @@ class SessionServiceTest {
         session.setId(99999L);
         when(sessionRepository.findById(session.getId())).thenReturn(Optional.empty());
 
-        Session foundSession = sessionService.getById(session.getId());
+        var foundSession = sessionService.getById(session.getId());
 
         verify(sessionRepository, times(1)).findById(session.getId());
         assertThat(foundSession).isNull();
@@ -106,7 +106,7 @@ class SessionServiceTest {
     void givenASessionAndItsId_whenCallIsMadeToUpdate_thenReturnsTheUpdatedSession() {
         when(sessionRepository.save(session)).thenReturn(session);
 
-        Session updatedSession = sessionService.update(session.getId(), session);
+        var updatedSession = sessionService.update(session.getId(), session);
 
         verify(sessionRepository, times(1)).save(session);
         assertThat(updatedSession).isEqualTo(session);
