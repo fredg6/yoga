@@ -20,7 +20,7 @@ public class UserController {
 
 
     public UserController(UserService userService,
-                             UserMapper userMapper) {
+                          UserMapper userMapper) {
         this.userMapper = userMapper;
         this.userService = userService;
     }
@@ -41,7 +41,7 @@ public class UserController {
     }
 
     @DeleteMapping("{id}")
-    public ResponseEntity<?> save(@PathVariable("id") String id) {
+    public ResponseEntity<?> delete(@PathVariable("id") String id) {
         try {
             User user = this.userService.findById(Long.valueOf(id));
 
@@ -51,7 +51,7 @@ public class UserController {
 
             UserDetails userDetails = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-            if(!Objects.equals(userDetails.getUsername(), user.getEmail())) {
+            if (!Objects.equals(userDetails.getUsername(), user.getEmail())) {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
 
