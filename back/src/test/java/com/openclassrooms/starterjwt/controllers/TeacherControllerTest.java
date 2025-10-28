@@ -97,10 +97,12 @@ class TeacherControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$").isArray())
                 .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].id").value(teachers.get(0).getId()))
                 .andExpect(jsonPath("$[0].lastName").value(teachers.get(0).getLastName()))
                 .andExpect(jsonPath("$[0].firstName").value(teachers.get(0).getFirstName()))
                 .andExpect(jsonPath("$[0].createdAt").exists()) // Juste exists() car 2 derniers chiffres tronqués lors du mapping (??)
                 .andExpect(jsonPath("$[0].updatedAt").exists()) // Idem
+                .andExpect(jsonPath("$[1].id").value(teachers.get(1).getId()))
                 .andExpect(jsonPath("$[1].lastName").value(teachers.get(1).getLastName()))
                 .andExpect(jsonPath("$[1].firstName").value(teachers.get(1).getFirstName()))
                 .andExpect(jsonPath("$[1].createdAt").exists()) // Juste exists() car 2 derniers chiffres tronqués lors du mapping (??)
