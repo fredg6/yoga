@@ -8,18 +8,18 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 class SignupRequestTest {
     private SignupRequest signupRequest;
     private Validator validator;
 
     @BeforeEach
-    void setUp() {
+    void init() {
         signupRequest = new SignupRequest();
         signupRequest.setEmail("test@test.com");
         signupRequest.setFirstName("Test");
-        signupRequest.setLastName("Test");
+        signupRequest.setLastName("Testt");
         signupRequest.setPassword("test!1234");
 
         validator = Validation.buildDefaultValidatorFactory().getValidator();
@@ -28,7 +28,7 @@ class SignupRequestTest {
     @Test
     void givenAValidSignupRequest_whenCallIsMadeToValidate_thenViolationsIsEmpty() {
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertTrue(violations.isEmpty());
+        assertThat(violations).isEmpty();
     }
 
     @Test
@@ -36,8 +36,8 @@ class SignupRequestTest {
         signupRequest.setEmail("");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email"))).isTrue();
     }
 
     @Test
@@ -45,8 +45,8 @@ class SignupRequestTest {
         signupRequest.setEmail(null);
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email"))).isTrue();
     }
 
     @Test
@@ -54,8 +54,8 @@ class SignupRequestTest {
         signupRequest.setEmail("test-test");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email"))).isTrue();
     }
 
     @Test
@@ -63,8 +63,8 @@ class SignupRequestTest {
         signupRequest.setEmail("test".repeat(15) + "@test.com");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("email"))).isTrue();
     }
 
     @Test
@@ -72,8 +72,8 @@ class SignupRequestTest {
         signupRequest.setFirstName("");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName"))).isTrue();
     }
 
     @Test
@@ -81,8 +81,8 @@ class SignupRequestTest {
         signupRequest.setFirstName(null);
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName"))).isTrue();
     }
 
     @Test
@@ -90,8 +90,8 @@ class SignupRequestTest {
         signupRequest.setFirstName("Te");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName"))).isTrue();
     }
 
     @Test
@@ -99,8 +99,8 @@ class SignupRequestTest {
         signupRequest.setFirstName("Test".repeat(10));
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("firstName"))).isTrue();
     }
 
     @Test
@@ -108,8 +108,8 @@ class SignupRequestTest {
         signupRequest.setLastName("");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName"))).isTrue();
     }
 
     @Test
@@ -117,8 +117,8 @@ class SignupRequestTest {
         signupRequest.setLastName(null);
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName"))).isTrue();
     }
 
     @Test
@@ -126,17 +126,17 @@ class SignupRequestTest {
         signupRequest.setLastName("Te");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName"))).isTrue();
     }
 
     @Test
     void givenASignupRequestWithTooLongLastName_whenCallIsMadeToValidate_thenViolationsIsNotEmptyAndContainsLastNameViolation() {
-        signupRequest.setLastName("Test".repeat(10));
+        signupRequest.setLastName("Testt".repeat(10));
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("lastName"))).isTrue();
     }
 
     @Test
@@ -144,8 +144,8 @@ class SignupRequestTest {
         signupRequest.setPassword("");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password"))).isTrue();
     }
 
     @Test
@@ -153,8 +153,8 @@ class SignupRequestTest {
         signupRequest.setPassword(null);
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password"))).isTrue();
     }
 
     @Test
@@ -162,8 +162,8 @@ class SignupRequestTest {
         signupRequest.setPassword("test!");
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password"))).isTrue();
     }
 
     @Test
@@ -171,16 +171,16 @@ class SignupRequestTest {
         signupRequest.setPassword("test!1234".repeat(5));
 
         Set<ConstraintViolation<SignupRequest>> violations = validator.validate(signupRequest);
-        assertFalse(violations.isEmpty());
-        assertTrue(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password")));
+        assertThat(violations).isNotEmpty();
+        assertThat(violations.stream().anyMatch(v -> v.getPropertyPath().toString().equals("password"))).isTrue();
     }
 
     @Test
     void whenCallIsMadeToGetters_thenReturnsSetData() {
-        assertEquals("test@test.com", signupRequest.getEmail());
-        assertEquals("Test", signupRequest.getFirstName());
-        assertEquals("Test", signupRequest.getLastName());
-        assertEquals("test!1234", signupRequest.getPassword());
+        assertThat(signupRequest.getEmail()).isEqualTo("test@test.com");
+        assertThat(signupRequest.getFirstName()).isEqualTo("Test");
+        assertThat(signupRequest.getLastName()).isEqualTo("Testt");
+        assertThat(signupRequest.getPassword()).isEqualTo("test!1234");
     }
 
     @Test
@@ -190,20 +190,20 @@ class SignupRequestTest {
         var signupRequest2 = new SignupRequest();
         signupRequest2.setEmail("test@test.com");
         signupRequest2.setFirstName("Test");
-        signupRequest2.setLastName("Test");
+        signupRequest2.setLastName("Testt");
         signupRequest2.setPassword("test!1234");
 
-        assertEquals(signupRequest1, signupRequest2);
-        assertEquals(signupRequest1.hashCode(), signupRequest2.hashCode());
+        assertThat(signupRequest1).isEqualTo(signupRequest2);
+        assertThat(signupRequest1.hashCode()).isEqualTo(signupRequest2.hashCode());
     }
 
     @Test
     void givenASignupRequest_whenCallIsMadeToToString_thenReturnIsNotNullAndContainsAllFieldsValues() {
         var toString = signupRequest.toString();
-        assertNotNull(toString);
-        assertTrue(toString.contains("test@test.com"));
-        assertTrue(toString.contains("Test"));
-        assertTrue(toString.contains("Test"));
-        assertTrue(toString.contains("test!1234"));
+        assertThat(toString).isNotNull();
+        assertThat(toString).contains("test@test.com");
+        assertThat(toString).contains("Test");
+        assertThat(toString).contains("Testt");
+        assertThat(toString).contains("test!1234");
     }
 }
