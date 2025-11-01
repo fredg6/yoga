@@ -148,6 +148,21 @@
                     </execution>
 
                 </executions>
+                <configuration>
+                    <!-- Excluded files from code coverage report -->
+                    <excludes>
+                        <!-- DTO package -->
+                        <exclude>com/openclassrooms/starterjwt/dto/*</exclude>
+                        <!-- Generated mappers -->
+                        <exclude>com/openclassrooms/starterjwt/mapper/EntityMapper*</exclude>
+                        <exclude>com/openclassrooms/starterjwt/mapper/TeacherMapper*</exclude>
+                        <exclude>com/openclassrooms/starterjwt/mapper/UserMapper*</exclude>
+                        <!-- POJOs -->
+                        <exclude>com/openclassrooms/starterjwt/models/*</exclude>
+                        <exclude>com/openclassrooms/starterjwt/payload/**</exclude>
+                        <exclude>com/openclassrooms/starterjwt/security/services/UserDetailsImpl.class</exclude>
+                    </excludes>
+                </configuration>
             </plugin>
         </plugins>
     </build>
